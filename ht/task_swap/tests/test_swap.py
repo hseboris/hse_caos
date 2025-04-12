@@ -12,19 +12,19 @@ class TestSwapProgram(unittest.TestCase):
         return result.stdout.strip()
 
     def test_basic(self):
-        self.assertEqual(self.run_swap(3, 5), "After swap: x = 5, y = 3")
+        self.assertEqual(self.run_swap(3, 5), "5 3")
 
     def test_negative(self):
-        self.assertEqual(self.run_swap(-1, 10), "After swap: x = 10, y = -1")
+        self.assertEqual(self.run_swap(-1, 10), "10 -1")
 
     def test_zero(self):
-        self.assertEqual(self.run_swap(0, 0), "After swap: x = 0, y = 0")
+        self.assertEqual(self.run_swap(0, 0), "0 0")
 
     def test_large(self):
-        self.assertEqual(self.run_swap(123456, 654321), "After swap: x = 654321, y = 123456")
+        self.assertEqual(self.run_swap(123456, 654321), "654321 123456")
 
     def test_equal(self):
-        self.assertEqual(self.run_swap(42, 42), "After swap: x = 42, y = 42")
+        self.assertEqual(self.run_swap(42, 42), "42 42")
 
 if __name__ == '__main__':
     unittest.main()
