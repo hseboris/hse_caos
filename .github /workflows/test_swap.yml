@@ -1,0 +1,28 @@
+name: Test Task Swap
+
+on:
+  push:
+    paths:
+      - 'ht/task_swap/**'
+  pull_request:
+    paths:
+      - 'ht/task_swap/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ht/task_swap
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Compile
+        run: make
+
+      - name: Run tests
+        run: python3 -m unittest discover tests
