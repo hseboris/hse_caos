@@ -4,3 +4,5 @@
 ### Домашнее задание №1
 
 [Задача 1](./ht/task_swap/README.md)
+
+[Задача 2](./ht/task_reverse/README.md)
