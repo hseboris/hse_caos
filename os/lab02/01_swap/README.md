@@ -8,7 +8,7 @@ Write a program in C that inputs two integer values `x` and `y`, call function `
 
 ## ⚙️ Быстрая сборка и тесты
 ```bash
-cd task1_swap
+cd 01_swap
 make                                  # собрать программу
 ./swap                                # запустить
 python3 -m unittest discover -v tests # запустить тесты

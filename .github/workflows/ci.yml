@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         task-folder:
-          - homework/assignment_02_01/task1_swap
+          - 01_swap/01_swap/01_swap
     steps:
       - uses: actions/checkout@v3
         with:
