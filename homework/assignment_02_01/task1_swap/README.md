@@ -16,3 +16,12 @@ Write a program in C that inputs two integer values `x` and `y`, call function `
 ```bash
 make
 ```
+3. Запуск
+```bash
+./swap
+```
+
+4. Тестирование
+```bash
+python3 -m unittest discover -v tests
+```
