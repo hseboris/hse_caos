@@ -25,3 +25,21 @@ make
 ```bash
 python3 -m unittest discover -v tests
 ```
+
+## Очистка сборки
+
+Чтобы удалить все скомпилированные файлы и артефакты, в той же папке выполните:
+
+```bash
+make clean
+```
+
+## Проверка на GitHub Actions
+
+После того, как вы закоммитите и запушите изменения:
+
+```bash
+git add solution.c
+git commit -m "Ваше сообщение"
+git push
+```
