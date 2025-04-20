@@ -12,6 +12,7 @@ jobs:
       matrix:
         task-folder:
           - os/lab02/01_swap
+          - os/lab02/02_array_reverse
     steps:
       - uses: actions/checkout@v3
         with:
