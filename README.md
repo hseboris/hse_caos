@@ -26,6 +26,10 @@ git remote add upstream \
   https://github.com/hseboris/hse_caos.git
 ```
 
+4. Когда будут внесены изменения в оригинальный шаблон, внутри локального клона делаем:
+```bash
+git fetch upstream
+```
 ## Домашние задания
 
 ### [Assignment 1. C Programming Language (23:59 4 мая 2025 года)](os/lab02/README.md)
