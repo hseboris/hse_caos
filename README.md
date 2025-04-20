@@ -30,6 +30,13 @@ git remote add upstream \
 ```bash
 git fetch upstream
 ```
+
+5. Сливаем изменения в свою рабочую ветку (обычно `main`):
+```bash
+git checkout main
+git merge upstream/main
+```
+
 ## Домашние задания
 
 ### [Assignment 1. C Programming Language (23:59 4 мая 2025 года)](os/lab02/README.md)
