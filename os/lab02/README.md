@@ -4,3 +4,5 @@
 [Задача 1. Swap](01_swap/README.md)
 
 [Задача 2. Array Reverse](02_array_reverse/README.md)
+
+[Задача 3. Array Reverse](03_array_reverse/README.md)

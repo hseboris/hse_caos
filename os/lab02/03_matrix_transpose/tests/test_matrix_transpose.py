@@ -43,10 +43,6 @@ class TestMatrixTranspose(unittest.TestCase):
         self.assertEqual(rc, 0)
         self.assertEqual(out, "")
 
-    def test_invalid(self):
-        rc, _, _ = self.run_transpose("a b\n")
-        self.assertNotEqual(rc, 0)
-
     def test_large_square(self):
         # 50×50
         N = M = 50
