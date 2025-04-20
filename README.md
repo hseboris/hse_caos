@@ -36,6 +36,7 @@ git fetch upstream
 git checkout main
 git merge upstream/main --allow-unrelated-histories
 ```
+Здесь может открыться окно для разрешения конфликта. Ничего комментировать не нужно, Вас git просто предупреждает.
 
 6. Отправляем обновления в свой приватный репозиторий на GitHub:
 ```bash
