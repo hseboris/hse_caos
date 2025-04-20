@@ -14,6 +14,7 @@ jobs:
           - os/lab02/01_swap
           - os/lab02/02_array_reverse
           - os/lab02/03_matrix_transpose
+          - os/lab02/04_list_reverse
     steps:
       - uses: actions/checkout@v3
         with:

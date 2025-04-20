@@ -6,3 +6,5 @@
 [Задача 2. Array Reverse](02_array_reverse/README.md)
 
 [Задача 3. Matrix Transpose](03_matrix_transpose/README.md)
+
+[Задача 4. List Reverse](04_list_reverse/README.md)
