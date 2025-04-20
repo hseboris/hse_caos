@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         task-folder:
-          - 01_swap/01_swap/01_swap
+          - os/lab02/01_swap
     steps:
       - uses: actions/checkout@v3
         with:
