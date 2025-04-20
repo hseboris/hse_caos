@@ -34,10 +34,8 @@ git fetch upstream
 5. Сливаем изменения в свою рабочую ветку (обычно `main`):
 ```bash
 git checkout main
-git merge upstream/main --allow-unrelated-histories
+git merge upstream/main --allow-unrelated-histories -m "Merge upstream into my repo"
 ```
-Здесь может открыться окно для разрешения конфликта. Ничего комментировать не нужно, Вас git просто предупреждает.
-
 6. Отправляем обновления в свой приватный репозиторий на GitHub:
 ```bash
 git push origin main
