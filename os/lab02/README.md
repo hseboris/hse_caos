@@ -2,3 +2,4 @@
 ## Мягкий дедлайн: 23:59 4 мая 2025 года
 
 [Задача 1. Swap](01_swap/README.md)
+[Задача 2. Array Reverse](02_array_reverse/README.md)
