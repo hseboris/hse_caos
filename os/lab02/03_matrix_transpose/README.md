@@ -20,3 +20,15 @@ make                                  # собрать программу
 ./matrix_transpose                    # запустить
 python3 -m unittest discover -v tests # запустить тесты
 ```
+
+## 🧹 Очистка
+```bash
+make clean
+```
+
+## 🚀 Автотесты в GitHub Actions
+```bash
+git add solution.c
+git commit -m "Ваше сообщение"
+git push                               # результат проверки появится в Actions ✅
+```
