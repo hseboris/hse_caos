@@ -20,7 +20,7 @@ git clone git@github.com:username/repo_name.git destination
 
 2. Откройте в терминале папку с репозиторием. 
 
-3. Добавьте &laquo;upstream&raquo; &ndash; ссылку на ваш шаблон‑репозиторий:
+3. Добавьте &laquo;upstream&raquo; &ndash; ссылку на этот шаблон‑репозиторий:
 ```bash
 git remote add upstream \
   https://github.com/hseboris/hse_caos.git
