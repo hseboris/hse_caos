@@ -45,3 +45,4 @@ git push origin main
 
 ### [Assignment 1. C Programming Language (23:59 4 мая 2025 года)](os/lab02/README.md)
 
+### [Assignment 2. Static and Shared Libraries (23:59 7 мая 2025 года)](os/lab04/README.md)
