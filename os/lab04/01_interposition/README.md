@@ -20,13 +20,13 @@ make                                  # собрать программу
 LD_PRELOAD=./libsam.so ./program      # runs with load-time interposition
 ```
 
-## 🧹 Clean
+## 🧹 Очистка
 
 ```bash
 make clean
 ```
 
-## 🚀 GitHub Actions CI
+## 🚀 Автотесты в GitHub Actions
 
 ```bash
 git add .
