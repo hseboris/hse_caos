@@ -20,8 +20,8 @@ The program finds all occurrences of the regular expression in the text and repl
 
 ```bash
 cd 01_regex_replace
-make                                  # сборка программы
-python3 -m unittest discover -v tests # запуск автотестов
+make                                      # сборка программы
+python3 -m unittest discover -v tests     # запуск автотестов
 ```
 
 ## 🧹 Очистка
@@ -34,6 +34,6 @@ make clean
 
 ```bash
 git add .
-git commit -m "Добавил решение Regex Replace"
+git commit -m "Ваше сообщение"
 git push                              # результат появится во вкладке Actions ✅
 ```
