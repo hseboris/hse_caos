@@ -3,13 +3,14 @@
 ## 📝 Условие
 
 Improve [Task 1 from Part 1](https://andrewt0301.github.io/hse-acos-course/part2os/04_Linking/libs.html):
-- Provide _link-time_ interpositioning for the fred and john functions
-- Provide _load-time_ interpositioning for the bill and sam functions
+- Provide _link-time_ interpositioning for the fred and john functions.
+- Provide _load-time_ interpositioning for the bill and sam functions.
 - Create a Make script to build the program.
 
 ## ℹ️ Примечание
 
-- interposed functions can just print a message like &laquo;fred is called&raquo;.
+- Вам нужно только написать `Makefile`.
+- В GitHub Actions автотесты запускаются внутри контейнера с операционной системой Ubuntu.
 
 ## ⚙️ Быстрая сборка и тесты
 
