@@ -1,43 +1,31 @@
-import os
-import sys
 import unittest
 import subprocess
 
-class TestInterposition(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        # Собираем программу и библиотеку
-        root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-        result = subprocess.run(['make'], cwd=root,
-                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-        if result.returncode != 0:
-            print(result.stdout, file=sys.stderr)
-            print(result.stderr, file=sys.stderr)
-            raise RuntimeError('Make failed')
+class TestSolution(unittest.TestCase):
+    def run_solution(self):
+        process = subprocess.Popen(
+            ['./solution'],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True
+        )
+        output, err = process.communicate()
+        return process.returncode, output.strip(), err.strip()
 
-    def test_link_time_interposition(self):
-        root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-        prog = os.path.join(root, 'program')
-        result = subprocess.run([prog],
-                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-        self.assertEqual(result.returncode, 0)
-        lines = result.stdout.strip().splitlines()
-        self.assertEqual(lines[0], "john (link‑wrap): fred is called with 42")
-        self.assertEqual(lines[1], "bill: you passed Hello World!")
+    def test_output(self):
+        rc, out, err = self.run_solution()
 
-    def test_load_time_interposition(self):
-        root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-        prog = os.path.join(root, 'program')
-        libsam = os.path.join(root, 'libsam.so')
-        env = os.environ.copy()
-        env['LD_PRELOAD'] = libsam
-        result = subprocess.run([prog], env=env,
-                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-        self.assertEqual(result.returncode, 0)
-        lines = result.stdout.strip().splitlines()
-        self.assertEqual(lines[0], "john (link‑wrap): fred is called with 42")
-        self.assertEqual(lines[1], "sam (LD_PRELOAD): bill is called with Hello World!")
-        self.assertEqual(lines[2], "bill: you passed Hello World!")
+        self.assertEqual(rc, 0, msg=f"Program exited with code {rc}, stderr: {err}")
+
+        expected_outputs = [
+            "bill: you passed Hello World!",
+            "fred: you passed 42",
+            "john: sqrt(16.000000) = 4.000000",
+            "sam: cos(3.141590) = -1.000000"
+        ]
+
+        for expected in expected_outputs:
+            self.assertIn(expected, out, msg=f"Expected '{expected}' in output, but not found.\nFull output:\n{out}")
 
 if __name__ == '__main__':
     unittest.main()
