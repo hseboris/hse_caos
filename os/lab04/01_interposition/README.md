@@ -16,8 +16,8 @@ Improve [Task 1 from Part 1](https://andrewt0301.github.io/hse-acos-course/part2
 ```bash
 cd 02_interposition
 make                                  # собрать программу
-./program                             # runs with link-time interposition
-LD_PRELOAD=./libsam.so ./program      # runs with load-time interposition
+make run                              # пропишите в cmake запуск
+                                      # (в том числе вывод используемых динамических библиотек)
 ```
 
 ## 🧹 Очистка
