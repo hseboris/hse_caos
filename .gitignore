@@ -1,5 +1,6 @@
 .idea/
 __pycache__/
+*.DS_Store
 swap
 array_rev
 matrix_transpose
