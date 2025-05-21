@@ -50,3 +50,5 @@ git push origin main
 ### [Assignment 3. Regular Expressions (23:59 12 мая 2025 года)](os/lab05/README.md)
 
 ### [Assignment 4. Processes (23:59 24 мая 2025 года)](os/lab06/README.md)
+
+### [Assignment 5. Shell Scripts (23:59 29 мая 2025 года)](os/lab07/README.md)
