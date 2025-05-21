@@ -33,5 +33,10 @@ class TestSumSum(unittest.TestCase):
     def test_negative_equal(self):
         self.run_case("qwe 3 4\n10 20 -30\n", "Equal")
 
+    def test_large_input_with_error(self):
+        line1 = " ".join(str(i) for i in range(100))        # сумма 0..99 = 4950
+        line2 = " ".join(str(i) for i in range(98)) + " X Y" # сумма 0..97 = 4753 → ошибка → 0
+        self.run_case(f"{line1}\n{line2}\n", "Not equal")
+
 if __name__ == '__main__':
     unittest.main()
