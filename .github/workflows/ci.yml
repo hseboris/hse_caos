@@ -119,8 +119,8 @@ jobs:
         working-directory: os/lab05/01_regex_replace
         run: python3 -m unittest discover -v tests
 
-  assignment4-processes:
-    name: Assignment 4 – Processes
+  assignment4-fork:
+    name: Assignment 4 – Fork
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
