@@ -16,7 +16,7 @@ Improve your previous `argredir.c` to:
 cd 06_argredir_strict
 make
 ./argredir input.txt output.txt cat
-python3 -m unittest discover -v tests
+python3 -m unittest discover -v test_pip2redir.py
 ```
 
 ## 🧹 Очистка

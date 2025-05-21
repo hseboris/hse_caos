@@ -11,3 +11,7 @@
 [Задача 4. ArgRedir](./04_argredir/README.md)
 
 [Задача 5. PipeRedir](./05_piperedir/README.md)
+
+[Задача 6. ArgRedir (Strict)](./06_argredir_strict/README.md)
+
+[Задача 7. Pip2Redir](./07_pip2redir/README.md)
