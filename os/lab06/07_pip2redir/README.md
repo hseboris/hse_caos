@@ -23,7 +23,7 @@ Example:
 cd 07_pip2redir
 make
 ./pip2redir echo wc
-python3 -m unittest discover -v test_pip2redir.py
+python3 -m unittest discover -v tests
 ```
 
 ## 🧹 Очистка

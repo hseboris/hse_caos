@@ -23,7 +23,7 @@ jobs:
         run: make
       - name: Test
         working-directory: os/lab02/01_swap
-        run: python3 -m unittest discover -v test_pip2redir.py
+        run: python3 -m unittest discover -v tests
 
   assignment1-array-reverse:
     name: Assignment 1 – Array Reverse
@@ -41,7 +41,7 @@ jobs:
         run: make
       - name: Test
         working-directory: os/lab02/02_array_reverse
-        run: python3 -m unittest discover -v test_pip2redir.py
+        run: python3 -m unittest discover -v tests
 
   assignment1-matrix-transpose:
     name: Assignment 1 – Matrix Transpose
@@ -59,7 +59,7 @@ jobs:
         run: make
       - name: Test
         working-directory: os/lab02/03_matrix_transpose
-        run: python3 -m unittest discover -v test_pip2redir.py
+        run: python3 -m unittest discover -v tests
 
   assignment1-list-reverse:
     name: Assignment 1 – List Reverse
@@ -77,7 +77,7 @@ jobs:
         run: make
       - name: Test
         working-directory: os/lab02/04_list_reverse
-        run: python3 -m unittest discover -v test_pip2redir.py
+        run: python3 -m unittest discover -v tests
 
   assignment2-interposition:
     name: Assignment 2 – Interposition
@@ -95,7 +95,7 @@ jobs:
         run: make
       - name: Test
         working-directory: os/lab04/01_interposition
-        run: python3 -m unittest discover -v test_pip2redir.py
+        run: python3 -m unittest discover -v tests
 
   assignment3-regex-replace:
     name: Assignment 3 – Regex Replace
@@ -117,7 +117,7 @@ jobs:
 
       - name: Run test_pip2redir.py
         working-directory: os/lab05/01_regex_replace
-        run: python3 -m unittest discover -v test_pip2redir.py
+        run: python3 -m unittest discover -v tests
 
   assignment4-fork:
     name: Assignment 4 – Fork
@@ -135,7 +135,7 @@ jobs:
         run: make
       - name: Run test_pip2redir.py
         working-directory: os/lab06/01_fork
-        run: python3 -m unittest discover -v test_pip2redir.py
+        run: python3 -m unittest discover -v tests
 
   assignment4-outredir:
     name: Assignment 4 – OutRedir
@@ -156,7 +156,7 @@ jobs:
 
       - name: Run test_pip2redir.py
         working-directory: os/lab06/02_outredir
-        run: python3 -m unittest discover -v test_pip2redir.py
+        run: python3 -m unittest discover -v tests
 
   assignment4-allredir:
     name: Assignment 4 – AllRedir
@@ -177,7 +177,7 @@ jobs:
 
       - name: Run test_pip2redir.py
         working-directory: os/lab06/03_allredir
-        run: python3 -m unittest discover -v test_pip2redir.py
+        run: python3 -m unittest discover -v tests
 
   assignment4-argredir:
     name: Assignment 4 – ArgRedir
@@ -198,7 +198,7 @@ jobs:
 
       - name: Run test_pip2redir.py
         working-directory: os/lab06/04_argredir
-        run: python3 -m unittest discover -v test_pip2redir.py
+        run: python3 -m unittest discover -v tests
 
   assignment4-piperedir:
     name: Assignment 4 – PipeRedir
@@ -219,7 +219,7 @@ jobs:
 
       - name: Run test_pip2redir.py
         working-directory: os/lab06/05_piperedir
-        run: python3 -m unittest discover -v test_pip2redir.py
+        run: python3 -m unittest discover -v tests
 
   assignment4-argredir-strict:
     name: Assignment 4 – ArgRedir Strict
@@ -240,7 +240,7 @@ jobs:
 
       - name: Run test_pip2redir.py
         working-directory: os/lab06/06_argredir_strict
-        run: python3 -m unittest discover -v test_pip2redir.py
+        run: python3 -m unittest discover -v tests
 
   assignment4-pip2redir:
     name: Assignment 4 – Pip2Redir
