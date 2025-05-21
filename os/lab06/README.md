@@ -9,3 +9,5 @@
 [Задача 3. AllRedir](./03_allredir/README.md)
 
 [Задача 4. ArgRedir](./04_argredir/README.md)
+
+[Задача 5. PipeRedir](./05_piperedir/README.md)
