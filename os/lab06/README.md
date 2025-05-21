@@ -5,3 +5,5 @@
 [Задача 1. Fork](./01_fork/README.md)
 
 [Задача 2. OutRedir](./02_outredir/README.md)
+
+[Задача 3. AllRedir](./03_allredir/README.md)
