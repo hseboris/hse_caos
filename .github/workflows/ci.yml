@@ -118,3 +118,21 @@ jobs:
       - name: Run tests
         working-directory: os/lab05/01_regex_replace
         run: python3 -m unittest discover -v tests
+
+  assignment4-processes:
+    name: Assignment 4 – Processes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Install tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential python3
+      - name: Build
+        working-directory: os/lab05/01_fork
+        run: make
+      - name: Run tests
+        working-directory: os/lab05/01_fork
+        run: python3 -m unittest discover -v tests

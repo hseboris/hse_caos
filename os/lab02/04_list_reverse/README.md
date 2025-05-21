@@ -28,7 +28,7 @@ make clean
 
 ## 🚀 Автотесты в GitHub Actions
 ```bash
-git add list_reverse.c
+git add solution.c
 git commit -m "Ваше сообщение"
 git push                               # результат проверки появится в Actions ✅
 ```
