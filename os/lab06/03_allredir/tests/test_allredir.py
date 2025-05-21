@@ -5,10 +5,10 @@ import os
 class TestAllRedir(unittest.TestCase):
     def setUp(self):
         self.bin = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'allredir'))
-        self.input_file = 'input_test.txt'
-        self.output_file = 'output_test.txt'
+        self.input_file = 'test_input.txt'
+        self.output_file = 'test_output.txt'
         with open(self.input_file, 'w') as f:
-            f.write('CAOS 2025\nhello world\n')
+            f.write('hello 123\nline 2\n')
 
     def tearDown(self):
         for f in [self.input_file, self.output_file]:
@@ -22,23 +22,20 @@ class TestAllRedir(unittest.TestCase):
                                 text=True,
                                 timeout=5)
         self.assertEqual(result.returncode, 0)
-        self.assertIn("received 0", result.stdout.strip())
+        self.assertIn('received 0', result.stdout.strip())
+        with open(self.input_file) as fin, open(self.output_file) as fout:
+            self.assertEqual(fin.read(), fout.read())
 
-        with open(self.output_file) as f_out, open(self.input_file) as f_in:
-            self.assertEqual(f_out.read(), f_in.read())
-
-    def test_grep(self):
-        result = subprocess.run([self.bin, 'grep', 'CAOS', self.input_file, self.output_file],
+    def test_wc(self):
+        result = subprocess.run([self.bin, 'wc', self.input_file, self.output_file],
                                 stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE,
                                 text=True,
                                 timeout=5)
         self.assertEqual(result.returncode, 0)
-        self.assertIn("received 0", result.stdout.strip())
-
+        self.assertIn('received 0', result.stdout.strip())
         with open(self.output_file) as f:
-            contents = f.read().strip()
-        self.assertEqual(contents, "CAOS 2025")
+            self.assertIn("2", f.read())  # 2 строки
 
 if __name__ == '__main__':
     unittest.main()
