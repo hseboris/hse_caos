@@ -281,3 +281,22 @@ jobs:
         run: |
           chmod +x c8.sh
           python3 -m unittest discover -v tests
+
+  assignment5-sumsum:
+    name: Assignment 5 – SumSum
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Install tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3
+
+      - name: Run tests
+        working-directory: os/lab07/02_sumsum
+        run: |
+          chmod +x sumsum.sh
+          python3 -m unittest discover -v tests
