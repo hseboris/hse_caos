@@ -178,3 +178,24 @@ jobs:
       - name: Run tests
         working-directory: os/lab06/03_allredir
         run: python3 -m unittest discover -v tests
+
+  assignment4-argredir:
+    name: Assignment 4 – ArgRedir
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Install tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential python3
+
+      - name: Build
+        working-directory: os/lab06/04_argredir
+        run: make
+
+      - name: Run tests
+        working-directory: os/lab06/04_argredir
+        run: python3 -m unittest discover -v tests
