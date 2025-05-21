@@ -158,8 +158,8 @@ jobs:
         working-directory: os/lab06/02_outredir
         run: python3 -m unittest discover -v tests
 
-  assignment5-allredir:
-    name: Assignment 5 – AllRedir
+  assignment4-allredir:
+    name: Assignment 4 – AllRedir
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
