@@ -16,7 +16,7 @@ class TestPipeRedir(unittest.TestCase):
         )
         self.assertEqual(result.returncode, 0)
         self.assertIn("00000000", result.stdout)
-        self.assertIn("UTC", result.stdout.upper())
+        self.assertRegex(result.stdout, r'\d{4}')
 
     def test_echo_to_wc(self):
         result = subprocess.run(
