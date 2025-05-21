@@ -131,8 +131,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y build-essential python3
       - name: Build
-        working-directory: os/lab05/01_fork
+        working-directory: os/lab06/01_fork
         run: make
       - name: Run tests
-        working-directory: os/lab05/01_fork
+        working-directory: os/lab06/01_fork
         run: python3 -m unittest discover -v tests
