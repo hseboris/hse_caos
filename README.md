@@ -54,3 +54,5 @@ git push origin main
 ### [Assignment 5. Shell Scripts (23:59 29 мая 2025 года)](os/lab07/README.md)
 
 ### [Assignment 6. Threads and synchronization (23:59 4 июня 2025 года)](os/lab08/README.md)
+
+### [Assignment 7. Inter-Process Communication (23:59 4 июня 2025 года)](os/lab09/README.md)
