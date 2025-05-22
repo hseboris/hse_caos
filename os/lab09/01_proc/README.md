@@ -26,7 +26,7 @@ $ ./proc 5
 ```bash
 cd 01_proc
 make
-timeout 6 ./proc 2               # пример запуска на 6 секунд с паузой 2 сек
+timeout 6 ./proc 2                        # пример запуска на 6 секунд с паузой 2 сек
 python3 -m unittest discover -v tests
 ```
 
