@@ -19,7 +19,7 @@ class TestSumC(unittest.TestCase):
         self.assertEqual(result.returncode, 0)
         out = result.stdout
         array_line = next(line for line in out.splitlines() if line.startswith("Array:"))
-        numbers = list(map(int, re.findall(r'\d+', array_line)))
+        numbers = list(map(int, re.findall(r'-?\d+', array_line)))
         expected = sum(numbers)
         reported = int(re.search(r"Total sum:\s*(-?\d+)" , out).group(1))
         self.assertEqual(expected, reported)
