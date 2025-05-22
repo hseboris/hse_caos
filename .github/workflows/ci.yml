@@ -300,3 +300,54 @@ jobs:
         run: |
           chmod +x sumsum.sh
           python3 -m unittest discover -v tests
+
+  assignment6-parallel-sum-c:
+    name: Assignment 6 – Parallel Sum (C)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Install tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential python3
+      - name: Build
+        working-directory: os/lab08/01_parallel_sum/c
+        run: make
+      - name: Run tests
+        working-directory: os/lab08/01_parallel_sum/c
+        run: python3 -m unittest discover -v tests
+
+  assignment6-parallel-sum-cpp:
+    name: Assignment 6 – Parallel Sum (C++)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Install tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y g++ python3
+      - name: Build
+        working-directory: os/lab08/01_parallel_sum/cpp
+        run: make
+      - name: Run tests
+        working-directory: os/lab08/01_parallel_sum/cpp
+        run: python3 -m unittest discover -v tests
+
+  assignment6-parallel-sum-python:
+    name: Assignment 6 – Parallel Sum (Python)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Install Python
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3
+      - name: Run tests
+        working-directory: os/lab08/01_parallel_sum/python
+        run: python3 -m unittest discover -v tests
