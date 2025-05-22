@@ -13,7 +13,7 @@ class TestKilln(unittest.TestCase):
             stderr=subprocess.PIPE,
             text=True
         )
-        self.assertIn("No such signal", result.stdout)
+        self.assertIn("No such signal", result.stderr)
         self.assertEqual(result.returncode, 1)
 
     def test_invalid_pid_zero(self):
