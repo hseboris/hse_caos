@@ -34,15 +34,16 @@ class TestCatchSig(unittest.TestCase):
         out = self.run_and_kill("USR1", signal.SIGUSR1)
         self.assertRegex(out, r"\[Caught: .*User.*\]")
 
-    def test_ignores_invalid_signal(self):
-        # запускаем с неверным сигналом
+    def test_invalid_signal(self):
         result = subprocess.run(
             [self.binary, "1", "FAKESIGNAL"],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-            text=True
+            text=True,
+            timeout=2
         )
-        self.assertIn("Cannot handle signal", result.stderr)
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("No such signal", result.stderr)
 
     def test_multiple_signals(self):
         proc = subprocess.Popen(
@@ -60,6 +61,7 @@ class TestCatchSig(unittest.TestCase):
         time.sleep(1)
         proc.terminate()
         out, _ = proc.communicate()
+
         self.assertRegex(out, r"\[Caught: .*Interrupt.*\]")
         self.assertRegex(out, r"\[Caught: .*Abort.*\]")
         self.assertRegex(out, r"\[Caught: .*User.*\]")

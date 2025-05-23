@@ -2,7 +2,7 @@
 
 ## 📝 Условие
 
-Write a program `catchsig.c` based on `proc.c` and `catch.c` ([link](https://andrewt0301.github.io/hse-acos-course/part2os/09_IPC/lecture.html)) that:
+Write a program `catchsig.c` based on `killn.c` and `catch.c` ([link](https://andrewt0301.github.io/hse-acos-course/part2os/09_IPC/lecture.html)) that:
 - takes an interval (in seconds) and a list of signal names;
 - prints its PID and an incrementing counter every `<interval>` seconds;
 - sets up handlers for the specified signals;
