@@ -5,3 +5,5 @@
 [Задача 1. Proc](./01_proc/README.md)
 
 [Задача 2. Killn](./02_killn/README.md)
+
+[Задача 3. CatchSig](./03_catchsig/README.md)
