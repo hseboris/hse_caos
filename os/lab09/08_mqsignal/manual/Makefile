@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -std=c23 -lrt
+CFLAGS = -Wall -Wextra -std=c2x -lrt
 
 all: snd_mq
 
