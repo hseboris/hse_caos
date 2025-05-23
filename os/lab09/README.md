@@ -8,4 +8,4 @@
 
 [Задача 3. CatchSig](./03_catchsig/README.md)
 
-[Задача 4.ChildCtl](./04_childctl/README.md)
+[Задача 4. ChildCtl](./04_childctl/README.md)
