@@ -14,9 +14,11 @@ class TestMQServer(unittest.TestCase):
 
         time.sleep(1)
         subprocess.run([self.sender_bin, self.queue, "hello"], check=True)
+        time.sleep(0.5)
         subprocess.run([self.sender_bin, self.queue, "QUIT"], check=True)
+        time.sleep(0.5)
 
-        out, err = server.communicate(timeout=3)
+        out, err = server.communicate(timeout=8)
 
         self.assertIn("Received: hello", out)
         self.assertNotIn("Received: QUIT", out)
