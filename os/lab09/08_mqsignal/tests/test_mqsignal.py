@@ -15,9 +15,11 @@ class TestMQSignal(unittest.TestCase):
 
         time.sleep(1)
         subprocess.run([self.sender_bin, self.queue, "Hello"], check=True)
-        time.sleep(0.5)
-        os.kill(server.pid, signal.SIGINT)
-        out, err = server.communicate(timeout=5)
+        time.sleep(1)
+
+        subprocess.run(["kill", "-SIGINT", str(server.pid)], check=True)
+
+        out, err = server.communicate(timeout=10)
 
         self.assertIn("Received: Hello", out)
         self.assertIn("Server stopped by SIGINT", out)
