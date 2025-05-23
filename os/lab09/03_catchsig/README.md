@@ -38,6 +38,6 @@ make clean
 ## 🚀 Автотесты в GitHub Actions
 ```bash
 git add catchsig.c
-git commit -m "Добавить catchsig"
-git push
+git commit -m "Ваше сообщение"
+git push                              # статус проверки появится в Actions ✅
 ```
