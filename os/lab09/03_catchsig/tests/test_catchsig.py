@@ -15,9 +15,9 @@ class TestCatchSig(unittest.TestCase):
             stderr=subprocess.PIPE,
             text=True
         )
-        time.sleep(1.5)
+        time.sleep(2.0)
         os.kill(proc.pid, sig)
-        time.sleep(1)
+        time.sleep(2.0)
         proc.terminate()
         out, err = proc.communicate(timeout=2)
         return out
@@ -26,13 +26,13 @@ class TestCatchSig(unittest.TestCase):
         out = self.run_and_kill("INT", signal.SIGINT)
         self.assertRegex(out, r"\[Caught: .*Interrupt.*\]")
 
-    def test_catches_usr1(self):
-        out = self.run_and_kill("USR1", signal.SIGUSR1)
-        self.assertRegex(out, r"\[Caught: .*User.*\]")
+    def test_catches_term(self):
+        out = self.run_and_kill("TERM", signal.SIGTERM)
+        self.assertRegex(out, r"\[Caught: .*Term.*\]")
 
-    def test_catches_usr2(self):
-        out = self.run_and_kill("USR2", signal.SIGUSR2)
-        self.assertRegex(out, r"\[Caught: .*User.*\]")
+    def test_catches_pipe(self):
+        out = self.run_and_kill("PIPE", signal.SIGPIPE)
+        self.assertRegex(out, r"\[Caught: .*Pipe.*\]")
 
     def test_invalid_signal(self):
         result = subprocess.run(
@@ -47,22 +47,23 @@ class TestCatchSig(unittest.TestCase):
 
     def test_multiple_signals(self):
         proc = subprocess.Popen(
-            [self.binary, "1", "INT", "USR1", "USR2"],
+            [self.binary, "1", "INT", "TERM", "PIPE"],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True
         )
-        time.sleep(1)
-        os.kill(proc.pid, signal.SIGUSR1)
-        time.sleep(1)
-        os.kill(proc.pid, signal.SIGUSR2)
-        time.sleep(1)
+        time.sleep(2)
+        os.kill(proc.pid, signal.SIGPIPE)
+        time.sleep(2)
+        os.kill(proc.pid, signal.SIGTERM)
+        time.sleep(2)
         os.kill(proc.pid, signal.SIGINT)
         time.sleep(1)
         proc.terminate()
         out, _ = proc.communicate()
 
-        self.assertRegex(out, r"\[Caught: .*User.*\]")
+        self.assertRegex(out, r"\[Caught: .*Pipe.*\]")
+        self.assertRegex(out, r"\[Caught: .*Term.*\]")
         self.assertRegex(out, r"\[Caught: .*Interrupt.*\]")
 
 if __name__ == '__main__':
