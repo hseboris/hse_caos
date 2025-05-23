@@ -6,58 +6,59 @@ Write a program `childctl.c` that:
 - takes `<timeout> <quit_signal> <signal1> [signal2 ...]` as arguments;
 - forks a child that runs infinitely;
 - parent process:
-  - every `<timeout>` seconds prints heartbeat counter and its PID;
-  - installs signal handlers for listed signals, printing signal descriptions;
-  - when `quit_signal` is received, prints "Quitting...", kills the child, waits for it, and exits.
+    - every `<timeout>` seconds prints heartbeat counter and its PID;
+    - installs signal handlers for listed signals, printing signal descriptions;
+    - when `quit_signal` is received, prints "Exiting gracefully ..." and exits.
 
 Example:
 ```bash
-$ ./childctl 2 TERM INT ALRM
-Forked child: 12345
+$ ./childctl 2 INT QUIT
 Parent heartbeat: 0
 Parent heartbeat: 1
-[Caught: Alarm]
+[Caught: Quit]
 Parent heartbeat: 2
 [Caught: Interrupt]
-Quitting...
-Child terminated. Exit status: 9
+Exiting gracefully on signal INT
 ```
 
 ## ℹ️ Примечание
 
 - Используйте `fork`, `sleep`, `strsignal`, `sigaction`, `kill`, `waitpid`, `getpid`.
-- Сигналы `INT`, `TERM`, `ALRM`, `QUIT` надёжно перехватываются и подходят для тестирования.
-- Не все сигналы могут быть обработаны (например, `KILL`, `STOP` нельзя перехватить).
+- Рекомендуемые сигналы для тестирования: `INT`, `QUIT`, `TERM`.
+- Сигналы `KILL`, `STOP` перехватить невозможно и не подходят.
 
 ## ⚙️ Быстрая сборка и тесты
 ```bash
 cd 04_childctl
 make
-./childctl 2 INT ALRM TERM
+./childctl 2 INT QUIT
 python3 -m unittest discover -v tests
 ```
 
 ## 🧪 Ручное тестирование
 
-1. Запусти программу:
+1. Запусти:
    ```bash
-   ./childctl 2 INT TERM
+   ./childctl 2 INT QUIT
    ```
 
-2. В другом терминале узнай PID процесса (или смотри в выводе программы).
+2. В другом терминале получи PID:
+   ```bash
+   ps aux | grep childctl
+   ```
 
 3. Отправь сигналы:
    ```bash
-   kill -TERM <pid>   # печатает "[Caught: Alarm]"
-   kill -INT <pid>    # завершает программу
+   kill -QUIT <pid>   # напечатает [Caught: Quit]
+   kill -INT <pid>    # завершит программу
    ```
 
 Ожидаемый вывод:
 ```
-12345: 0
-12345: 1
-[Caught: Terminated]
-12345: 2
+Parent heartbeat: 0
+Parent heartbeat: 1
+[Caught: Quit]
+Parent heartbeat: 2
 [Caught: Interrupt]
 Exiting gracefully on signal INT
 ```
