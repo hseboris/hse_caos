@@ -500,3 +500,26 @@ jobs:
       - name: Run tests
         working-directory: os/lab09/07_mqserver
         run: python3 -m unittest discover -v tests
+
+  assignment7-mqsignal:
+    name: Assignment 7* – MQSignal
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Install tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential gcc make python3
+
+      - name: Build
+        working-directory: os/lab09/08_mqsignal
+        run: |
+          make
+          make -C manual
+
+      - name: Run tests
+        working-directory: os/lab09/08_mqsignal
+        run: python3 -m unittest discover -v tests
