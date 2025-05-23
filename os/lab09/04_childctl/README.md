@@ -41,14 +41,14 @@ python3 -m unittest discover -v tests
 
 1. Запусти программу:
    ```bash
-   ./childctl 2 INT ALRM TERM
+   ./childctl 2 INT TERM
    ```
 
 2. В другом терминале узнай PID процесса (или смотри в выводе программы).
 
 3. Отправь сигналы:
    ```bash
-   kill -ALRM <pid>   # печатает "[Caught: Alarm]"
+   kill -TERM <pid>   # печатает "[Caught: Alarm]"
    kill -INT <pid>    # завершает программу
    ```
 
@@ -56,11 +56,10 @@ python3 -m unittest discover -v tests
 ```
 12345: 0
 12345: 1
-[Caught: Alarm]
+[Caught: Terminated]
 12345: 2
 [Caught: Interrupt]
-Quitting...
-Child terminated. Exit status: 9
+Exiting gracefully on signal INT
 ```
 
 ## 🧹 Очистка
