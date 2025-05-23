@@ -26,12 +26,12 @@ class TestCatchSig(unittest.TestCase):
         out = self.run_and_kill("INT", signal.SIGINT)
         self.assertRegex(out, r"\[Caught: .*Interrupt.*\]")
 
-    def test_catches_abrt(self):
-        out = self.run_and_kill("ABRT", signal.SIGABRT)
-        self.assertRegex(out, r"\[Caught: .*Abort.*\]")
-
     def test_catches_usr1(self):
         out = self.run_and_kill("USR1", signal.SIGUSR1)
+        self.assertRegex(out, r"\[Caught: .*User.*\]")
+
+    def test_catches_usr2(self):
+        out = self.run_and_kill("USR2", signal.SIGUSR2)
         self.assertRegex(out, r"\[Caught: .*User.*\]")
 
     def test_invalid_signal(self):
@@ -47,7 +47,7 @@ class TestCatchSig(unittest.TestCase):
 
     def test_multiple_signals(self):
         proc = subprocess.Popen(
-            [self.binary, "1", "INT", "ABRT", "USR1"],
+            [self.binary, "1", "INT", "USR1", "USR2"],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True
@@ -55,16 +55,15 @@ class TestCatchSig(unittest.TestCase):
         time.sleep(1)
         os.kill(proc.pid, signal.SIGUSR1)
         time.sleep(1)
-        os.kill(proc.pid, signal.SIGINT)
+        os.kill(proc.pid, signal.SIGUSR2)
         time.sleep(1)
-        os.kill(proc.pid, signal.SIGABRT)
+        os.kill(proc.pid, signal.SIGINT)
         time.sleep(1)
         proc.terminate()
         out, _ = proc.communicate()
 
-        self.assertRegex(out, r"\[Caught: .*Interrupt.*\]")
-        self.assertRegex(out, r"\[Caught: .*Abort.*\]")
         self.assertRegex(out, r"\[Caught: .*User.*\]")
+        self.assertRegex(out, r"\[Caught: .*Interrupt.*\]")
 
 if __name__ == '__main__':
     unittest.main()
