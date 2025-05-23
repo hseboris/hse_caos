@@ -10,19 +10,32 @@ class TestMQSignal(unittest.TestCase):
         self.sender_bin = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'manual', 'snd_mq'))
         self.queue = "/mqsignal"
 
-    def test_receive_and_sigint_exit(self):
+    def test_quit_message_stops_server(self):
         server = subprocess.Popen([self.server_bin], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
         time.sleep(1)
-        subprocess.run([self.sender_bin, self.queue, "Hello"], check=True)
+        subprocess.run([self.sender_bin, self.queue, "hello"], check=True)
+        time.sleep(0.5)
+        subprocess.run([self.sender_bin, self.queue, "QUIT"], check=True)
+
+        out, err = server.communicate(timeout=5)
+
+        self.assertIn("Received: hello", out)
+        self.assertIn("Server stopped", out)
+        self.assertEqual(server.returncode, 0)
+
+    def test_sigint_stops_server(self):
+        server = subprocess.Popen([self.server_bin], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+
         time.sleep(1)
+        subprocess.run([self.sender_bin, self.queue, "test"], check=True)
+        time.sleep(0.5)
+        os.kill(server.pid, signal.SIGINT)
 
-        subprocess.run(["kill", "-SIGINT", str(server.pid)], check=True)
+        out, err = server.communicate(timeout=5)
 
-        out, err = server.communicate(timeout=10)
-
-        self.assertIn("Received: Hello", out)
-        self.assertIn("Server stopped by SIGINT", out)
+        self.assertIn("Received: test", out)
+        self.assertIn("Server stopped", out)
         self.assertEqual(server.returncode, 0)
 
 if __name__ == '__main__':

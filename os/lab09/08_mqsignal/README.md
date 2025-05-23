@@ -2,20 +2,15 @@
 
 ## 📝 Условие
 
-Write a program `mqsignal.c` that:
-
-- creates a POSIX message queue `/mqsignal`;
-- installs a `SIGINT` handler to stop the server on Ctrl+C;
-- receives messages in a loop via `mq_receive`;
-- prints every message received;
-- unlinks the queue and exits gracefully on `SIGINT`.
-
-## ℹ️ Примечание
-
-- Use `mq_open`, `mq_receive`, `mq_close`, `mq_unlink`, `signal`;
-- Use `sig_atomic_t` flag to control termination from signal handler;
-- Check every system call and print errors using `perror()`;
-- The message queue should be properly freed/unlinked even on interruption.
+- Ожидать сообщения в очереди `/mqsignal`;
+- Печать всех сообщений;
+- Завершать работу при:
+    - сообщении `"QUIT"` (строго 4 байта);
+    - сигнале `SIGINT` (Ctrl+C);
+- Обязательно:
+    - закрывать очередь;
+    - удалять очередь;
+    - проверять все ошибки.
 
 ## ⚙️ Быстрая сборка и тесты
 
@@ -32,49 +27,34 @@ cd manual
 make
 ```
 
-### Терминал 1 (сервер):
+### Терминал 1:
 
 ```bash
 cd ..
 ./mqsignal
 ```
 
-### Терминал 2 (отправка сообщений):
+### Терминал 2:
 
 ```bash
 cd manual
-./snd_mq /mqsignal "Hello"
-./snd_mq /mqsignal "Another"
+./snd_mq /mqsignal "hello"
+./snd_mq /mqsignal "QUIT"
 ```
 
-### Прервать сервер:
+или нажмите `Ctrl+C` в первом терминале.
 
-Нажмите `Ctrl+C` в первом терминале.
-
-Ожидаемый вывод:
-
-```
-Received: Hello
-Received: Another
-Server stopped by SIGINT
-```
-
-## 🧪 Запуск на macOS через Docker
+## 🐳 Docker
 
 ```bash
 docker build -t mqsignal-lab .
-```
-
-### Запуск контейнера:
-
-```bash
 docker run -it -d --name mqsignal-container --cap-add SYS_ADMIN \
   --mount type=bind,source=$(pwd),target=/lab09/08_mqsignal \
   --mount type=tmpfs,destination=/dev/mqueue \
   mqsignal-lab
 ```
 
-### Терминал 1 (сервер):
+Терминал 1:
 
 ```bash
 docker exec -it mqsignal-container bash
@@ -83,7 +63,7 @@ make
 ./mqsignal
 ```
 
-### Терминал 2 (отправка сообщений):
+Терминал 2:
 
 ```bash
 docker exec -it mqsignal-container bash
@@ -93,13 +73,6 @@ make
 ./snd_mq /mqsignal "QUIT"
 ```
 
-### Завершение:
-
-```bash
-docker stop mqsignal-container
-docker rm mqsignal-container
-```
-
 ## 🧹 Очистка
 
 ```bash
@@ -107,7 +80,7 @@ make clean
 cd manual && make clean
 ```
 
-## 🚀 Автотесты в GitHub Actions
+## 🚀 GitHub Actions
 
 ```bash
 git add .
