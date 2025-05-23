@@ -7,7 +7,7 @@ Write a program `mqserver.c` that:
 - creates a POSIX message queue `/mqserver`;
 - waits and receives messages in a loop using `mq_receive`;
 - prints every message received;
-- if the message is equal to `"QUIT"` (5 bytes including `\0`), exits;
+- if the message is equal to "QUIT" (5 bytes including `\0`), exits;
 - unlinks the queue before exiting.
 
 Example:
@@ -37,11 +37,19 @@ python3 -m unittest discover -v tests
 ```bash
 cd manual
 make
+```
 
-# в одном терминале:
-../mqserver
+> ⚠️ Важно: сначала запустите `mqserver`, чтобы очередь была создана.
 
-# в другом:
+### Терминал 1 (сервер):
+```bash
+cd ..
+./mqserver
+```
+
+### Терминал 2 (отправка сообщений):
+```bash
+cd manual
 ./snd_mq /mqserver "msg1"
 ./snd_mq /mqserver "msg2"
 ./snd_mq /mqserver "QUIT"
@@ -79,7 +87,10 @@ docker run --rm -it --cap-add SYS_ADMIN \
 cd manual
 make
 
-../mqserver &
+# В одном терминале:
+../mqserver
+
+# В другом терминале:
 ./snd_mq /mqserver "Hello"
 ./snd_mq /mqserver "QUIT"
 ```
