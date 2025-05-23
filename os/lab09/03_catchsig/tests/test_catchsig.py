@@ -26,9 +26,9 @@ class TestCatchSig(unittest.TestCase):
         out = self.run_and_kill("INT", signal.SIGINT)
         self.assertRegex(out, r"\[Caught: .*Interrupt.*\]")
 
-    def test_catches_usr1(self):
-        out = self.run_and_kill("USR1", signal.SIGUSR1)
-        self.assertRegex(out, r"\[Caught: .*User.*\]")
+    def test_catches_quit(self):
+        out = self.run_and_kill("QUIT", signal.SIGQUIT)
+        self.assertRegex(out, r"\[Caught: .*Quit.*\]")
 
     def test_catches_alrm(self):
         out = self.run_and_kill("ALRM", signal.SIGALRM)
@@ -47,13 +47,13 @@ class TestCatchSig(unittest.TestCase):
 
     def test_multiple_signals(self):
         proc = subprocess.Popen(
-            [self.binary, "1", "INT", "USR1", "ALRM"],
+            [self.binary, "1", "INT", "QUIT", "ALRM"],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True
         )
         time.sleep(2)
-        os.kill(proc.pid, signal.SIGUSR1)
+        os.kill(proc.pid, signal.SIGQUIT)
         time.sleep(2)
         os.kill(proc.pid, signal.SIGALRM)
         time.sleep(2)
@@ -62,9 +62,9 @@ class TestCatchSig(unittest.TestCase):
         proc.terminate()
         out, _ = proc.communicate()
 
-        self.assertRegex(out, r"\[Caught: .*User.*\]")
-        self.assertRegex(out, r"\[Caught: .*Interrupt.*\]")
+        self.assertRegex(out, r"\[Caught: .*Quit.*\]")
         self.assertRegex(out, r"\[Caught: .*Alarm.*\]")
+        self.assertRegex(out, r"\[Caught: .*Interrupt.*\]")
 
 if __name__ == '__main__':
     unittest.main()
