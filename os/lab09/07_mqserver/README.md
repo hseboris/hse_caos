@@ -72,27 +72,37 @@ Received: msg2
 docker build -t mqserver-lab .
 ```
 
-### 2. Запустите контейнер
+### 2. Запустите контейнер в фоновом режиме
 
 ```bash
-docker run --rm -it --cap-add SYS_ADMIN \
+docker run -it -d --name mqserver-container --cap-add SYS_ADMIN \
   --mount type=bind,source=$(pwd),target=/lab09/07_mqserver \
   --mount type=tmpfs,destination=/dev/mqueue \
   mqserver-lab
 ```
 
-### 3. Внутри контейнера
+### 3. Откройте два терминала
 
+#### Терминал 1 — сервер:
 ```bash
-cd manual
+docker exec -it mqserver-container bash
+cd /lab09/07_mqserver
 make
+./mqserver
+```
 
-# В одном терминале:
-../mqserver
-
-# В другом терминале:
+#### Терминал 2 — отправка сообщений:
+```bash
+docker exec -it mqserver-container bash
+cd /lab09/07_mqserver/manual
+make
 ./snd_mq /mqserver "Hello"
 ./snd_mq /mqserver "QUIT"
+```
+
+### 4. Завершите контейнер
+```bash
+docker stop mqserver-container
 ```
 
 ## 🧹 Очистка
