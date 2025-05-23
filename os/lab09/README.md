@@ -15,3 +15,5 @@
 [Задача 6 *. SendMQ](./06_sendmq/README.md)
 
 [Задача 7*. MQServer](./07_mqserver/README.md)
+
+[Задача 8*. MQSignal](./08_mqsignal/README.md)
