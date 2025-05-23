@@ -64,7 +64,7 @@ Received: msg2
 
 ## 🧪 Запуск на macOS через Docker
 
-Если вы используете macOS и хотите протестировать POSIX message queues:
+Если вы используете macOS и хотите протестировать POSIX message queues (не поддерживаются напрямую в macOS), выполните следующие шаги:
 
 ### 1. Соберите Docker-образ
 
@@ -81,28 +81,43 @@ docker run -it -d --name mqserver-container --cap-add SYS_ADMIN \
   mqserver-lab
 ```
 
-### 3. Откройте два терминала
+### 3. Откройте первый терминал (сервер)
 
-#### Терминал 1 — сервер:
 ```bash
 docker exec -it mqserver-container bash
+```
+
+Внутри:
+```bash
 cd /lab09/07_mqserver
 make
 ./mqserver
 ```
 
-#### Терминал 2 — отправка сообщений:
+### 4. Откройте второй терминал (отправка сообщений)
+
 ```bash
 docker exec -it mqserver-container bash
+```
+
+Внутри:
+```bash
 cd /lab09/07_mqserver/manual
 make
-./snd_mq /mqserver "Hello"
+./snd_mq /mqserver "msg1"
+./snd_mq /mqserver "msg2"
 ./snd_mq /mqserver "QUIT"
 ```
 
-### 4. Завершите контейнер
+### 5. Завершение контейнера
+
 ```bash
 docker stop mqserver-container
+```
+
+(опционально)
+```bash
+docker rm mqserver-container
 ```
 
 ## 🧹 Очистка
