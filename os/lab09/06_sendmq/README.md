@@ -27,20 +27,6 @@ make                                      # сборка программы
 python3 -m unittest discover -v tests     # запуск автотестов
 ```
 
-## 🧹 Очистка
-
-```bash
-make clean
-```
-
-## 🚀 Автотесты в GitHub Actions
-
-```bash
-git add .
-git commit -m "Ваше сообщение"
-git push                              # статус проверки появится в Actions ✅
-```
-
 ## 🧪 Ручное тестирование
 
 1. Перейдите в подкаталог:
@@ -68,7 +54,7 @@ make
 ./rec_mq
 ```
 
-Ожидаемый вывод:
+Ожидаемый результат:
 
 ```
 Received: Hello, MQ!
@@ -79,4 +65,60 @@ Priority: 1
 
 ```bash
 make clean
+```
+
+## 🧪 Запуск на macOS через Docker
+
+Если вы используете macOS и хотите протестировать POSIX message queues (которые не поддерживаются напрямую в macOS), выполните следующие шаги:
+
+### 1. Соберите образ Docker
+
+```bash
+docker build -t sendmq-lab .
+```
+
+### 2. Запустите контейнер с монтированием папки и `/dev/mqueue`
+
+```bash
+docker run --rm -it --cap-add SYS_ADMIN \
+  --mount type=bind,source=$(pwd),target=/lab09/06_sendmq \
+  --mount type=tmpfs,destination=/dev/mqueue \
+  sendmq-lab
+```
+
+### 3. Внутри контейнера
+
+```bash
+cd manual
+make
+./crt_mq
+
+cd ..
+make
+./sendmq /testmq "Hello from Docker"
+
+cd manual
+./rec_mq
+```
+
+Ожидаемый результат:
+
+```
+Received: Hello from Docker
+Priority: 1
+```
+
+## 🧹 Очистка
+
+```bash
+make clean
+cd manual && make clean
+```
+
+## 🚀 Автотесты в GitHub Actions
+
+```bash
+git add .
+git commit -m "Ваше сообщение"
+git push                              # статус проверки появится в Actions ✅
 ```
