@@ -12,4 +12,6 @@
 
 [Задача 5. ChildCtl (3x)](./05_childctl_3x/README.md)
 
-[Задача 6. SendMQ](./06_sendmq/README.md)
+[Задача 6 *. SendMQ](./06_sendmq/README.md)
+
+[Задача 7*. MQServer](./07_mqserver/README.md)
