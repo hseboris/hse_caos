@@ -10,22 +10,22 @@ class TestChildCtl(unittest.TestCase):
 
     def test_heartbeat_and_quit(self):
         proc = subprocess.Popen(
-            [self.binary, "1", "INT", "INT", "USR1"],
+            [self.binary, "1", "INT", "INT", "ALRM"],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True
         )
 
-        time.sleep(3)
-        os.kill(proc.pid, signal.SIGINT)  # send quit signal
-        time.sleep(2)
-
-        out, err = proc.communicate(timeout=2)
+        time.sleep(2.5)
+        os.kill(proc.pid, signal.SIGALRM)
+        time.sleep(0.5)
+        os.kill(proc.pid, signal.SIGINT)
+        out, err = proc.communicate(timeout=3)
 
         self.assertIn("Parent heartbeat", out)
-        self.assertIn("Caught: Interrupt", out)
-        self.assertIn("Quitting...", out)
-        self.assertIn("Child terminated", out)
+        self.assertIn("[Caught: Alarm]", out)
+        self.assertIn("[Caught: Interrupt]", out)
+        self.assertIn("Exiting gracefully on signal INT", out)
         self.assertEqual(proc.returncode, 0)
 
 if __name__ == '__main__':
