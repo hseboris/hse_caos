@@ -51,7 +51,7 @@ class TestKilln(unittest.TestCase):
             text=True
         )
         self.assertNotEqual(result.returncode, 0)
-        self.assertIn("kill", result.stderr)
+        self.assertIn("Failed to send signal", result.stderr)
 
 if __name__ == '__main__':
     unittest.main()
