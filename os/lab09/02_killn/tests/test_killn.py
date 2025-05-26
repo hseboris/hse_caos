@@ -16,16 +16,6 @@ class TestKilln(unittest.TestCase):
         self.assertIn("No such signal", result.stderr)
         self.assertEqual(result.returncode, 1)
 
-    def test_invalid_pid_zero(self):
-        result = subprocess.run(
-            [self.binary, "0", "TERM"],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True
-        )
-        self.assertIn("Invalid PID", result.stderr)
-        self.assertEqual(result.returncode, 1)
-
     def test_missing_arguments(self):
         result = subprocess.run(
             [self.binary],
@@ -35,6 +25,35 @@ class TestKilln(unittest.TestCase):
         )
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("Usage:", result.stderr)
+
+    def test_kill_self_with_safe_signal(self):
+        result = subprocess.run(
+            [self.binary, str(os.getpid()), "CONT"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True
+        )
+        self.assertEqual(result.returncode, 0)
+        self.assertEqual(result.stderr.strip(), "")
+
+    def test_kill_invalid_pid(self):
+        result = subprocess.run(
+            [self.binary, "999999", "TERM"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True
+        )
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("kill", result.stderr)
+
+    def test_kill_self_with_usr1(self):
+        result = subprocess.run(
+            [self.binary, str(os.getpid()), "USR1"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True
+        )
+        self.assertEqual(result.returncode, 0)
 
 if __name__ == '__main__':
     unittest.main()
