@@ -1,6 +1,7 @@
 import unittest
 import subprocess
 import os
+import time
 
 class TestKilln(unittest.TestCase):
     def setUp(self):
@@ -26,13 +27,19 @@ class TestKilln(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("Usage:", result.stderr)
 
-    def test_kill_self_with_safe_signal(self):
+    def test_kill_sleep_process(self):
+        proc = subprocess.Popen(["sleep", "5"])
+        time.sleep(0.5)
+
         result = subprocess.run(
-            [self.binary, str(os.getpid()), "CONT"],
+            [self.binary, str(proc.pid), "TERM"],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True
         )
+
+        proc.wait(timeout=3)
+
         self.assertEqual(result.returncode, 0)
         self.assertEqual(result.stderr.strip(), "")
 
@@ -45,15 +52,6 @@ class TestKilln(unittest.TestCase):
         )
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("kill", result.stderr)
-
-    def test_kill_self_with_usr1(self):
-        result = subprocess.run(
-            [self.binary, str(os.getpid()), "USR1"],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True
-        )
-        self.assertEqual(result.returncode, 0)
 
 if __name__ == '__main__':
     unittest.main()
